@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tabela de Vidros - Estoque</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #222; }
+  h2 { margin-top: 30px; }
+  table { border-collapse: collapse; width: 100%; max-width: 700px; margin-bottom: 40px; background: white; box-shadow: 0 0 8px #ccc; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  th { background: #0073e6; color: white; }
+  button { padding: 4px 10px; margin: 0 5px; font-size: 14px; cursor: pointer; }
+  .qty { width: 40px; text-align: center; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>📋 Tabela de Vidros - Estoque</h1>
+
+<!-- Seção Apple -->
+<h2>🟢 Apple</h2>
+<table id="apple-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<!-- Seção Xiaomi -->
+<h2>🔶 Xiaomi</h2>
+<table id="xiaomi-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<!-- Seção LG -->
+<h2>🟩 LG</h2>
+<table id="lg-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<!-- Seção Zenfone -->
+<h2>🟦 Zenfone</h2>
+<table id="zenfone-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<!-- Seção Samsung -->
+<h2>🔵 Samsung</h2>
+<table id="samsung-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<!-- Seção Motorola -->
+<h2>🟥 Motorola</h2>
+<table id="motorola-table">
+<thead>
+<tr><th>Modelo</th><th>Quantidade</th><th>Ações</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+// Dados iniciais
+const estoque = {
+  apple: [
+    { modelo: "iPhone 7", qtd: 7 },
+    { modelo: "iPhone 7 Plus", qtd: 7 },
+    { modelo: "iPhone 8", qtd: 10 },
+    { modelo: "iPhone 8 Plus", qtd: 5 },
+    { modelo: "iPhone X", qtd: 1 },
+    { modelo: "iPhone XS Max", qtd: 6 },
+    { modelo: "XS Max Vidro Touch", qtd: 4 },
+    { modelo: "iPhone XR", qtd: 1 },
+    { modelo: "XR Vidro Touch", qtd: 3 },
+    { modelo: "iPhone 11", qtd: 6 },
+    { modelo: "11 Vidro Touch", qtd: 7 },
+    { modelo: "iPhone 11 Pro", qtd: 4 },
+    { modelo: "11 Pro Vidro Touch", qtd: 2 },
+    { modelo: "11 Pro Max Vidro Touch", qtd: 1 },
+    { modelo: "iPhone 12 mini", qtd: 1 },
+    { modelo: "12 Pro Vidro Touch Sem C.i", qtd: 1 },
+    { modelo: "12 Pro Vidro Touch Com C.i", qtd: 2 },
+    { modelo: "iPhone 12 Pro Max", qtd: 4 },
+    { modelo: "12 Pro Max Vidro Touch", qtd: 3 },
+    { modelo: "iPhone 13 / 13 Pro / 14", qtd: 10 },
+    { modelo: "iPhone 13 Pro Max", qtd: 2 },
+    { modelo: "iPhone 14 Pro", qtd: 6 },
+    { modelo: "iPhone 14 Pro Max", qtd: 5 },
+    { modelo: "iPhone 15", qtd: 6 },
+    { modelo: "iPhone 15 Pro", qtd: 5 },
+    { modelo: "iPhone 15 Plus", qtd: 1 },
+    { modelo: "iPhone 15 Pro Max PLR", qtd: 10 },
+    { modelo: "iPhone 15 Pro Max", qtd: 9 },
+    { modelo: "iPhone 16", qtd: 3 },
+    { modelo: "iPhone 16 Pro", qtd: 3 },
+    { modelo: "iPhone 16 Plus", qtd: 1 },
+    { modelo: "iPhone 16 Pro Max", qtd: 3 },
+  ],
+  xiaomi: [
+    { modelo: "Redmi Note 8 Pro", qtd: 2 },
+    { modelo: "Mi 9s", qtd: 2 },
+    { modelo: "Mi Note 11 5G", qtd: 1 },
+    { modelo: "Mi Note 11 4G", qtd: 2 },
+    { modelo: "X4 GT", qtd: 1 },
+    { modelo: "X5 Pro", qtd: 1 },
+  ],
+  lg: [
+    { modelo: "K42", qtd: 4 },
+  ],
+  zenfone: [
+    { modelo: "ZB602KL", qtd: 1 },
+    { modelo: "Zenfone 5 Lite", qtd: 2 },
+  ],
+  samsung: [
+    { modelo: "S6 Edge", qtd: 6 },
+    { modelo: "S7 Edge", qtd: 15 },
+    { modelo: "S8 Plus", qtd: 1 },
+    { modelo: "S8 Edge", qtd: 24 },
+    { modelo: "S8 Edge Plus", qtd: 24 },
+    { modelo: "S10", qtd: 1 },
+    { modelo: "S10e", qtd: 2 },
+    { modelo: "S10 Plus", qtd: 2 },
+    { modelo: "S22", qtd: 1 },
+    { modelo: "S22 Ultra", qtd: 2 },
+    { modelo: "S24 Ultra", qtd: 2 },
+    { modelo: "Note 8", qtd: 2 },
+    { modelo: "J4", qtd: 1 },
+    { modelo: "J7 Prime", qtd: 1 },
+    { modelo: "J7 Pro", qtd: 1 },
+    { modelo: "J4 Plus", qtd: 10 },
+    { modelo: "J6 Plus", qtd: 1 },
+    { modelo: "J6 Incell", qtd: 1 },
+    { modelo: "J8", qtd: 3 },
+    { modelo: "A7 2018", qtd: 3 },
+    { modelo: "A8", qtd: 1 },
+    { modelo: "A9", qtd: 1 },
+    { modelo: "A03 Core", qtd: 1 },
+    { modelo: "A10", qtd: 2 },
+    { modelo: "A20 (Incell)", qtd: 1 },
+    { modelo: "A30", qtd: 2 },
+    { modelo: "A50 (Incell)", qtd: 1 },
+    { modelo: "A20s", qtd: 1 },
+    { modelo: "A21s", qtd: 4 },
+    { modelo: "A54", qtd: 1 },
+    { modelo: "A80", qtd: 1 },
+    { modelo: "A90", qtd: 1 },
+    { modelo: "M62", qtd: 1 },
+    { modelo: "(Câmera em gota)", qtd: 2 },
+  ],
+  motorola: [
+    { modelo: "E7", qtd: 4 },
+    { modelo: "G6 Play", qtd: 3 },
+    { modelo: "G7 Power", qtd: 1 },
+    { modelo: "E5 Plus", qtd: 1 },
+    { modelo: "One Action", qtd: 2 },
+    { modelo: "G8", qtd: 4 },
+    { modelo: "G8 Power", qtd: 2 },
+    { modelo: "G9", qtd: 1 },
+    { modelo: "G9 Plus", qtd: 1 },
+    { modelo: "G9 Power", qtd: 2 },
+    { modelo: "One Macro", qtd: 1 },
+    { modelo: "One Zoom", qtd: 3 },
+    { modelo: "Moto One", qtd: 1 },
+    { modelo: "One Fusion Plus", qtd: 1 },
+    { modelo: "G100", qtd: 1 },
+    { modelo: "Edge 20 / 20 Pro", qtd: 1 },
+    { modelo: "G 5G", qtd: 4 },
+    { modelo: "Moto Edge 20 Lite", qtd: 1 },
+    { modelo: "Edge 30 Ultra", qtd: 1 },
+  ],
+};
+
+// Função para salvar no localStorage
+function salvarEstoque() {
+  localStorage.setItem('estoqueVidros', JSON.stringify(estoque));
+}
+
+// Função para carregar do localStorage
+function carregarEstoque() {
+  const data = localStorage.getItem('estoqueVidros');
+  if (data) {
+    const parsed = JSON.parse(data);
+    // Atualiza apenas as quantidades para manter os modelos (segurança)
+    for (const marca in estoque) {
+      if (parsed[marca]) {
+        parsed[marca].forEach(item => {
+          const localItem = estoque[marca].find(i => i.modelo === item.modelo);
+          if (localItem) {
+            localItem.qtd = item.qtd;
+          }
+        });
+      }
+    }
+  }
+}
+
+// Função para criar linhas da tabela
+function criarLinhaTabela(marca, item, index) {
+  const tr = document.createElement('tr');
+
+  // Modelo
+  const tdModelo = document.createElement('td');
+  tdModelo.textContent = item.modelo;
+  tr.appendChild(tdModelo);
+
+  // Quantidade
+  const tdQtd = document.createElement('td');
+  tdQtd.className = 'qty';
+  tdQtd.textContent = item.qtd;
+  tr.appendChild(tdQtd);
+
+  // Ações (botões + / -)
+  const tdAcoes = document.createElement('td');
+
+  const btnDec = document.createElement('button');
+  btnDec.textContent = '-';
+  btnDec.title = 'Diminuir';
+  btnDec.onclick = () => {
+    if (estoque[marca][index].qtd > 0) {
+      estoque[marca][index].qtd--;
+      tdQtd.textContent = estoque[marca][index].qtd;
+      salvarEstoque();
+    }
+  };
+  tdAcoes.appendChild(btnDec);
+
+  const btnInc = document.createElement('button');
+  btnInc.textContent = '+';
+  btnInc.title = 'Aumentar';
+  btnInc.onclick = () => {
+    estoque[marca][index].qtd++;
+    tdQtd.textContent = estoque[marca][index].qtd;
+    salvarEstoque();
+  };
+  tdAcoes.appendChild(btnInc);
+
+  tr.appendChild(tdAcoes);
+
+  return tr;
+}
+
+// Função para popular a tabela de uma marca
+function popularTabela(marca, tabelaId) {
+  const tbody = document.querySelector(`#${tabelaId} tbody`);
+  tbody.innerHTML = '';
+  estoque[marca].forEach((item, index) => {
+    const tr = criarLinhaTabela(marca, item, index);
+    tbody.appendChild(tr);
+  });
+}
+
+// Carregar dados e popular tabelas na inicialização
+carregarEstoque();
+popularTabela('apple', 'apple-table');
+popularTabela('xiaomi', 'xiaomi-table');
+popularTabela('lg', 'lg-table');
+popularTabela('zenfone', 'zenfone-table');
+popularTabela('samsung', 'samsung-table');
+popularTabela('motorola', 'motorola-table');
+</script>
+
+</body>
+</html>
